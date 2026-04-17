@@ -33,11 +33,21 @@ BEGIN
   END IF;
 END $$;
 
-CREATE POLICY "Users can manage own enrollments" ON enrollments
-  FOR ALL USING (user_id = auth.jwt() ->> 'sub');
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE policyname = 'Users can manage own enrollments') THEN
+    CREATE POLICY "Users can manage own enrollments" ON enrollments
+      FOR ALL USING (user_id = auth.jwt() ->> 'sub');
+  END IF;
+END $$;
 
-CREATE POLICY "Users can manage own progress" ON progress
-  FOR ALL USING (user_id = auth.jwt() ->> 'sub');
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE policyname = 'Users can manage own progress') THEN
+    CREATE POLICY "Users can manage own progress" ON progress
+      FOR ALL USING (user_id = auth.jwt() ->> 'sub');
+  END IF;
+END $$;
 
 -- 6. Seed Data — 55 High Quality Engineering Courses
 INSERT INTO courses (title, description, thumbnail_url, instructor, category, level, youtube_url, youtube_playlist_id) VALUES
