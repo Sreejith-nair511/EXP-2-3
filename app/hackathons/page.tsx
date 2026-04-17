@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { hackathons } from '@/lib/constants';
 import { Calendar, ExternalLink, MapPin, Tag, Trophy, Users } from 'lucide-react';
@@ -36,7 +36,7 @@ export default function HackathonsPage() {
             Hackathons & <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-violet-400">Competitions</span>
           </h1>
           <p className="text-slate-400 text-lg">
-            Compete, build, and win — sourced from India's top hackathon platforms
+            Compete, build, and win â€” sourced from India's top hackathon platforms
           </p>
         </div>
       </div>
@@ -45,9 +45,9 @@ export default function HackathonsPage() {
         {/* Main Tabs */}
         <div className="flex flex-wrap gap-2 border-b border-white/10 pb-0">
           {[
-            { key: 'cards', label: '🏆 All Hackathons' },
-            { key: 'unstop', label: '🔶 Unstop' },
-            { key: 'hack2skill', label: '🟣 Hack2Skill' },
+            { key: 'cards', label: 'ðŸ† All Hackathons' },
+            { key: 'unstop', label: 'ðŸ”¶ Unstop' },
+            { key: 'hack2skill', label: 'ðŸŸ£ Hack2Skill' },
           ].map((tab) => (
             <button
               key={tab.key}
@@ -85,7 +85,7 @@ export default function HackathonsPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filtered.map((hackathon) => {
-                const platform = platformConfig[hackathon.platform as keyof typeof platformConfig];
+                const platform = platformConfig[hackathon.platform as keyof typeof platformConfig] ?? platformConfig.other;
                 return (
                   <div
                     key={hackathon.id}
@@ -176,7 +176,7 @@ export default function HackathonsPage() {
               />
             </div>
             <p className="text-slate-500 text-xs text-center">
-              Content loaded from unstop.com — if blocked by your browser, use the "Open in new tab" button above.
+              Content loaded from unstop.com â€” if blocked by your browser, use the "Open in new tab" button above.
             </p>
           </div>
         )}
@@ -208,7 +208,7 @@ export default function HackathonsPage() {
               />
             </div>
             <p className="text-slate-500 text-xs text-center">
-              Content loaded from hack2skill.com — if blocked by your browser, use the "Open in new tab" button above.
+              Content loaded from hack2skill.com â€” if blocked by your browser, use the "Open in new tab" button above.
             </p>
           </div>
         )}
@@ -216,3 +216,4 @@ export default function HackathonsPage() {
     </div>
   );
 }
+
