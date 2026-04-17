@@ -10,6 +10,7 @@ import {
   LayoutDashboard,
   Sparkles,
   Map,
+  Briefcase,
   X,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -21,6 +22,7 @@ const iconMap = {
   'Resume Builder': <FileText className="w-5 h-5" />,
   Hackathons: <Sparkles className="w-5 h-5" />,
   Roadmaps: <Map className="w-5 h-5" />,
+  Jobs: <Briefcase className="w-5 h-5" />,
 };
 
 interface SidebarProps {

@@ -5,6 +5,7 @@ export const navigationItems = [
   { label: 'Resume Builder', href: '/resume-builder' },
   { label: 'Hackathons', href: '/hackathons' },
   { label: 'Roadmaps', href: '/roadmaps' },
+  { label: 'Jobs', href: '/jobs' },
 ];
 
 export const features = [
