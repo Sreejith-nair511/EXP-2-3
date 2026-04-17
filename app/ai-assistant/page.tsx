@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useRef, useEffect } from 'react';
 import { Send, Plus, Trash2, Sparkles, Code, User as UserIcon, Bot, Youtube, Search, ExternalLink, Play } from 'lucide-react';
@@ -125,7 +125,7 @@ const YT_RESOURCES = [
 ];
 
 const GOOGLE_RESOURCES = [
-  { title: 'React Documentation', desc: 'Official React docs — components, hooks, state management', url: 'https://react.dev', category: 'Frontend' },
+  { title: 'React Documentation', desc: 'Official React docs â€” components, hooks, state management', url: 'https://react.dev', category: 'Frontend' },
   { title: 'MDN Web Docs', desc: 'Complete reference for HTML, CSS, JavaScript APIs', url: 'https://developer.mozilla.org', category: 'Web Dev' },
   { title: 'roadmap.sh', desc: 'Developer roadmaps for frontend, backend, DevOps, and more', url: 'https://roadmap.sh', category: 'Career' },
   { title: 'LeetCode', desc: 'Practice DSA problems for coding interviews', url: 'https://leetcode.com', category: 'DSA' },
@@ -133,9 +133,9 @@ const GOOGLE_RESOURCES = [
   { title: 'Stack Overflow', desc: 'Q&A for programming problems and debugging', url: 'https://stackoverflow.com', category: 'Community' },
   { title: 'GitHub', desc: 'Host code, contribute to open source, build portfolio', url: 'https://github.com', category: 'Tools' },
   { title: 'Dev.to', desc: 'Engineering articles, tutorials, and community posts', url: 'https://dev.to', category: 'Blog' },
-  { title: 'Supabase Docs', desc: 'Open source Firebase alternative — PostgreSQL + Auth + Storage', url: 'https://supabase.com/docs', category: 'Backend' },
+  { title: 'Supabase Docs', desc: 'Open source Firebase alternative â€” PostgreSQL + Auth + Storage', url: 'https://supabase.com/docs', category: 'Backend' },
   { title: 'Vercel Docs', desc: 'Deploy Next.js apps, edge functions, and serverless APIs', url: 'https://vercel.com/docs', category: 'DevOps' },
-  { title: 'System Design Primer', desc: 'GitHub repo — learn how to design large-scale systems', url: 'https://github.com/donnemartin/system-design-primer', category: 'System Design' },
+  { title: 'System Design Primer', desc: 'GitHub repo â€” learn how to design large-scale systems', url: 'https://github.com/donnemartin/system-design-primer', category: 'System Design' },
   { title: 'NeetCode', desc: 'Structured DSA roadmap and video explanations for interviews', url: 'https://neetcode.io', category: 'DSA' },
 ];
 
@@ -211,7 +211,7 @@ export default function AIAssistantPage() {
           </button>
         </div>
         <div className="flex-1 p-4 space-y-1">
-          {([['chat', '💬', 'AI Chat'], ['youtube', '▶️', 'YouTube Resources'], ['google', '🔍', 'Web Resources']] as [Tab, string, string][]).map(([key, emoji, label]) => (
+          {([['chat', 'ðŸ’¬', 'AI Chat'], ['youtube', 'â–¶ï¸', 'YouTube Resources'], ['google', 'ðŸ”', 'Web Resources']] as [Tab, string, string][]).map(([key, emoji, label]) => (
             <button key={key} onClick={() => setActiveTab(key)}
               className={`w-full text-left px-4 py-3 rounded-lg font-medium transition-colors text-sm flex items-center gap-2 ${activeTab === key ? 'bg-primary/10 text-primary' : 'text-muted-foreground hover:bg-muted'}`}>
               <span>{emoji}</span>{label}
@@ -236,14 +236,14 @@ export default function AIAssistantPage() {
               {activeTab === 'youtube' ? 'YouTube Engineering Resources' : activeTab === 'google' ? 'Web Engineering Resources' : 'AI Career Assistant'}
             </h1>
             <p className="text-xs text-muted-foreground">
-              {activeTab === 'youtube' ? 'Curated YouTube courses — click to watch' : activeTab === 'google' ? 'Top engineering websites and docs' : 'Powered by Groq AI'}
+              {activeTab === 'youtube' ? 'Curated YouTube courses â€” click to watch' : activeTab === 'google' ? 'Top engineering websites and docs' : 'Powered by Groq AI'}
             </p>
           </div>
           <div className="ml-auto flex gap-1 md:hidden">
             {(['chat', 'youtube', 'google'] as Tab[]).map(t => (
               <button key={t} onClick={() => setActiveTab(t)}
                 className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${activeTab === t ? 'bg-primary text-white' : 'bg-muted text-muted-foreground'}`}>
-                {t === 'chat' ? '💬' : t === 'youtube' ? '▶️' : '🔍'}
+                {t === 'chat' ? 'ðŸ’¬' : t === 'youtube' ? 'â–¶ï¸' : 'ðŸ”'}
               </button>
             ))}
           </div>
@@ -274,7 +274,7 @@ export default function AIAssistantPage() {
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {filteredYt.map(r => (
-                <a key={r.url} href={r.url} target="_blank" rel="noopener noreferrer"
+                <a key={`yt-${r.url}-${r.title}`} href={r.url} target="_blank" rel="noopener noreferrer"
                   className="group bg-white/5 border border-white/10 hover:border-red-500/30 rounded-2xl overflow-hidden transition-all hover:bg-white/[0.07]">
                   <div className="relative">
                     <img src={r.thumb} alt={r.title} className="w-full h-36 object-cover" />
@@ -321,7 +321,7 @@ export default function AIAssistantPage() {
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {filteredG.map(r => (
-                <a key={r.url} href={r.url} target="_blank" rel="noopener noreferrer"
+                <a key={`yt-${r.url}-${r.title}`} href={r.url} target="_blank" rel="noopener noreferrer"
                   className="group flex flex-col gap-3 p-5 bg-white/5 border border-white/10 hover:border-blue-500/30 rounded-2xl transition-all hover:bg-white/[0.07]">
                   <div className="flex items-start justify-between gap-2">
                     <span className="px-2 py-0.5 bg-blue-500/20 text-blue-300 rounded-full text-xs font-semibold">{r.category}</span>
@@ -331,7 +331,7 @@ export default function AIAssistantPage() {
                     <h3 className="text-white font-bold text-sm">{r.title}</h3>
                     <p className="text-slate-400 text-xs mt-1 leading-relaxed">{r.desc}</p>
                   </div>
-                  <span className="text-blue-400 text-xs font-semibold mt-auto">{r.url.replace('https://', '')} →</span>
+                  <span className="text-blue-400 text-xs font-semibold mt-auto">{r.url.replace('https://', '')} â†’</span>
                 </a>
               ))}
             </div>
@@ -407,3 +407,4 @@ export default function AIAssistantPage() {
     </div>
   );
 }
+

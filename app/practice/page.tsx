@@ -7,7 +7,8 @@ const PLATFORMS = [
   {
     key: 'neetcode',
     label: 'NeetCode',
-    emoji: '🧠',
+    logo: 'https://neetcode.io/favicon.ico',
+    logoBg: 'bg-white',
     url: 'https://neetcode.io/practice',
     desc: 'Structured DSA roadmap with video explanations — best for interview prep',
     color: 'from-green-500 to-emerald-500',
@@ -17,7 +18,8 @@ const PLATFORMS = [
   {
     key: 'leetcode',
     label: 'LeetCode',
-    emoji: '💻',
+    logo: 'https://leetcode.com/favicon-32x32.png',
+    logoBg: 'bg-[#1a1a2e]',
     url: 'https://leetcode.com/problemset/',
     desc: 'World\'s largest coding interview platform — 3000+ problems',
     color: 'from-orange-500 to-yellow-500',
@@ -27,7 +29,8 @@ const PLATFORMS = [
   {
     key: 'codechef',
     label: 'CodeChef',
-    emoji: '👨‍🍳',
+    logo: 'https://www.codechef.com/favicon.ico',
+    logoBg: 'bg-white',
     url: 'https://www.codechef.com/practice',
     desc: 'Competitive programming with monthly contests and practice problems',
     color: 'from-amber-500 to-orange-500',
@@ -37,7 +40,8 @@ const PLATFORMS = [
   {
     key: 'codeforces',
     label: 'Codeforces',
-    emoji: '⚡',
+    logo: 'https://codeforces.com/favicon-32x32.png',
+    logoBg: 'bg-white',
     url: 'https://codeforces.com/problemset',
     desc: 'Top competitive programming platform with frequent rated contests',
     color: 'from-blue-500 to-cyan-500',
@@ -47,7 +51,8 @@ const PLATFORMS = [
   {
     key: 'hackerrank',
     label: 'HackerRank',
-    emoji: '🟢',
+    logo: 'https://www.hackerrank.com/favicon.ico',
+    logoBg: 'bg-[#1ba94c]',
     url: 'https://www.hackerrank.com/domains/algorithms',
     desc: 'Skill-based assessments and coding challenges used by recruiters',
     color: 'from-emerald-500 to-teal-500',
@@ -57,7 +62,8 @@ const PLATFORMS = [
   {
     key: 'geeksforgeeks',
     label: 'GeeksforGeeks',
-    emoji: '📚',
+    logo: 'https://www.geeksforgeeks.org/favicon.ico',
+    logoBg: 'bg-white',
     url: 'https://practice.geeksforgeeks.org/',
     desc: 'Practice problems with detailed explanations and company-wise questions',
     color: 'from-lime-500 to-green-500',
@@ -112,7 +118,7 @@ export default function PracticePage() {
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-8 space-y-8">
         {/* Section tabs */}
         <div className="flex gap-2 border-b border-white/10">
-          {([['platforms', '🏆 Platforms'], ['topics', '📋 DSA Topics']] as const).map(([key, label]) => (
+          {([['platforms', 'Platforms'], ['topics', 'DSA Topics']] as const).map(([key, label]) => (
             <button key={key} onClick={() => setActiveSection(key)}
               className={`px-5 py-2.5 font-semibold text-sm rounded-t-lg transition-all duration-200 ${activeSection === key ? 'bg-green-500/20 text-green-300 border-b-2 border-green-400' : 'text-slate-400 hover:text-white'}`}>
               {label}
@@ -130,7 +136,9 @@ export default function PracticePage() {
                   <div className="bg-slate-900 rounded-2xl p-6 h-full">
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center gap-3">
-                        <span className="text-4xl">{p.emoji}</span>
+                        <div className={`w-12 h-12 rounded-xl ${p.logoBg} flex items-center justify-center p-1.5 flex-shrink-0`}>
+                          <img src={p.logo} alt={p.label} className="w-full h-full object-contain" />
+                        </div>
                         <div>
                           <h2 className="text-xl font-bold text-white">{p.label}</h2>
                           <p className="text-slate-400 text-sm mt-0.5">{p.desc}</p>
@@ -159,7 +167,9 @@ export default function PracticePage() {
                 <a key={p.key} href={p.url} target="_blank" rel="noopener noreferrer"
                   className="group flex flex-col gap-3 p-5 bg-white/5 border border-white/10 hover:border-white/20 rounded-2xl transition-all hover:bg-white/[0.07]">
                   <div className="flex items-center justify-between">
-                    <span className="text-3xl">{p.emoji}</span>
+                    <div className={`w-10 h-10 rounded-xl ${p.logoBg} flex items-center justify-center p-1.5 flex-shrink-0`}>
+                      <img src={p.logo} alt={p.label} className="w-full h-full object-contain" />
+                    </div>
                     <ExternalLink className="w-4 h-4 text-slate-500 group-hover:text-white transition-colors" />
                   </div>
                   <div>
@@ -205,13 +215,15 @@ export default function PracticePage() {
             {/* Quick links */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-white/10">
               {[
-                { label: 'LeetCode Top 150', url: 'https://leetcode.com/studyplan/top-interview-150/', icon: '💻', desc: 'Must-do interview problems' },
-                { label: 'NeetCode 250', url: 'https://neetcode.io/practice', icon: '🧠', desc: 'Extended problem set' },
-                { label: 'Blind 75', url: 'https://leetcode.com/discuss/general-discussion/460599/blind-75-leetcode-questions', icon: '🎯', desc: 'Classic 75 problems' },
+                { label: 'LeetCode Top 150', url: 'https://leetcode.com/studyplan/top-interview-150/', logo: 'https://leetcode.com/favicon-32x32.png', logoBg: 'bg-[#1a1a2e]', desc: 'Must-do interview problems' },
+                { label: 'NeetCode 250', url: 'https://neetcode.io/practice', logo: 'https://neetcode.io/favicon.ico', logoBg: 'bg-white', desc: 'Extended problem set' },
+                { label: 'Blind 75', url: 'https://leetcode.com/discuss/general-discussion/460599/blind-75-leetcode-questions', logo: 'https://leetcode.com/favicon-32x32.png', logoBg: 'bg-[#1a1a2e]', desc: 'Classic 75 problems' },
               ].map(l => (
                 <a key={l.label} href={l.url} target="_blank" rel="noopener noreferrer"
                   className="flex items-center gap-3 p-4 bg-white/5 border border-white/10 hover:border-white/20 rounded-xl transition-all group">
-                  <span className="text-2xl">{l.icon}</span>
+                  <div className={`w-9 h-9 rounded-lg ${l.logoBg} flex items-center justify-center p-1.5 flex-shrink-0`}>
+                    <img src={l.logo} alt={l.label} className="w-full h-full object-contain" />
+                  </div>
                   <div>
                     <p className="text-white font-semibold text-sm">{l.label}</p>
                     <p className="text-slate-500 text-xs">{l.desc}</p>

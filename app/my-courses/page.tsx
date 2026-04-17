@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase-server';
+import { createAdminClient } from '@/lib/supabase-server';
 import { auth } from '@clerk/nextjs/server';
 import { CourseCard } from '@/components/dashboard/course-card';
 import { BookOpen, GraduationCap, ArrowRight } from 'lucide-react';
@@ -9,7 +9,7 @@ export default async function MyCoursesPage() {
     const { userId } = await auth();
     if (!userId) return redirect('/sign-in');
 
-    const supabase = await createClient();
+    const supabase = await createAdminClient();
 
     // Fetch enrolled courses for the user
     const { data: enrollments, error } = await supabase

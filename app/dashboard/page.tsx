@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase-server';
+import { createAdminClient } from '@/lib/supabase-server';
 import { auth, currentUser } from '@clerk/nextjs/server';
 import { WelcomeCard } from '@/components/dashboard/welcome-card';
 import { CourseCard } from '@/components/dashboard/course-card';
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default async function DashboardPage() {
   const { userId } = await auth();
   const user = await currentUser();
-  const supabase = await createClient();
+  const supabase = await createAdminClient();
 
   // 1. Fetch Enrolled Courses
   const { data: enrollments } = await supabase
