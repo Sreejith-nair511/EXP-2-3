@@ -148,6 +148,8 @@ export default async function CourseDetailPage({ params }: PageProps) {
                 courseId={course.id}
                 enrolled={enrolled}
                 completed={completed}
+                courseTitle={course.title}
+                instructorName={course.instructor}
               />
 
               <div className="mt-8 space-y-4">
@@ -163,7 +165,7 @@ export default async function CourseDetailPage({ params }: PageProps) {
                   <Users className="w-5 h-5 text-cyan-400" />
                   <div>
                     <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Students</p>
-                    <p className="font-bold text-white">8,420+ Enrolled</p>
+                    <p className="font-bold text-white">{(course.enrollment_count || 0).toLocaleString()}+ Enrolled</p>
                   </div>
                 </div>
 

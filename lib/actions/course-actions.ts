@@ -14,19 +14,12 @@ export async function enrollInCourse(courseId: string) {
         .from('enrollments')
         .upsert({ user_id: userId, course_id: courseId }, { onConflict: 'user_id,course_id' });
 
-    if (error) {
-        console.error('Enrollment error details:', {
-            code: error.code,
-            message: error.message,
-            details: error.details,
-            hint: error.hint
-        });
-        throw new Error(`Failed to enroll in course: ${error.message}`);
-    }
+    if (error) throw new Error(`Failed to enroll: ${error.message}`);
 
     revalidatePath('/courses');
     revalidatePath(`/courses/${courseId}`);
     revalidatePath('/my-courses');
+    revalidatePath('/dashboard');
 }
 
 export async function updateCourseProgress(courseId: string, completed: boolean) {
@@ -41,20 +34,13 @@ export async function updateCourseProgress(courseId: string, completed: boolean)
             user_id: userId,
             course_id: courseId,
             completed,
-            completed_at: completed ? new Date().toISOString() : null
+            completed_at: completed ? new Date().toISOString() : null,
         }, { onConflict: 'user_id,course_id' });
 
-    if (error) {
-        console.error('Progress update error details:', {
-            code: error.code,
-            message: error.message,
-            details: error.details,
-            hint: error.hint
-        });
-        throw new Error(`Failed to update progress: ${error.message}`);
-    }
+    if (error) throw new Error(`Failed to update progress: ${error.message}`);
 
     revalidatePath('/courses');
     revalidatePath(`/courses/${courseId}`);
     revalidatePath('/my-courses');
+    revalidatePath('/dashboard');
 }

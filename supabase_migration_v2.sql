@@ -126,7 +126,29 @@ INSERT INTO courses (title, description, thumbnail_url, instructor, category, le
 ('Software Design Patterns', 'Gang of Four patterns — Singleton, Factory, Observer, Strategy and more in TypeScript.', 'https://img.youtube.com/vi/tv-_1er1mWI/maxresdefault.jpg', 'Fireship', 'Software Engineering', 'Intermediate', 'https://www.youtube.com/playlist?list=PLMCXHnjXnTnvPatterns001', 'PLMCXHnjXnTnvPatterns001')
 ON CONFLICT (youtube_playlist_id) DO NOTHING;
 
--- 7. Performance Indexes
+-- Add enrollment_count column to courses table
+ALTER TABLE courses ADD COLUMN IF NOT EXISTS enrollment_count INTEGER DEFAULT 0;
+
+-- Function to increment enrollment count
+CREATE OR REPLACE FUNCTION increment_enrollment_count()
+RETURNS TRIGGER AS $$
+BEGIN
+  UPDATE courses SET enrollment_count = enrollment_count + 1 WHERE id = NEW.course_id;
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Trigger: fires after each new enrollment
+DROP TRIGGER IF EXISTS on_enrollment_insert ON enrollments;
+CREATE TRIGGER on_enrollment_insert
+  AFTER INSERT ON enrollments
+  FOR EACH ROW EXECUTE FUNCTION increment_enrollment_count();
+
+-- Backfill existing enrollment counts
+UPDATE courses c
+SET enrollment_count = (
+  SELECT COUNT(*) FROM enrollments e WHERE e.course_id = c.id
+);
 CREATE INDEX IF NOT EXISTS idx_enrollments_user_id ON enrollments(user_id);
 CREATE INDEX IF NOT EXISTS idx_enrollments_course_id ON enrollments(course_id);
 CREATE INDEX IF NOT EXISTS idx_progress_user_id ON progress(user_id);
