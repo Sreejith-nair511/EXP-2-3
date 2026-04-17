@@ -211,10 +211,14 @@ export default function AIAssistantPage() {
           </button>
         </div>
         <div className="flex-1 p-4 space-y-1">
-          {([['chat', 'ðŸ’¬', 'AI Chat'], ['youtube', 'â–¶ï¸', 'YouTube Resources'], ['google', 'ðŸ”', 'Web Resources']] as [Tab, string, string][]).map(([key, emoji, label]) => (
+          {([
+            ['chat', 'chat', 'AI Chat'],
+            ['youtube', 'youtube', 'YouTube Resources'],
+            ['google', 'google', 'Web Resources'],
+          ] as [Tab, string, string][]).map(([key, iconKey, label]) => (
             <button key={key} onClick={() => setActiveTab(key)}
               className={`w-full text-left px-4 py-3 rounded-lg font-medium transition-colors text-sm flex items-center gap-2 ${activeTab === key ? 'bg-primary/10 text-primary' : 'text-muted-foreground hover:bg-muted'}`}>
-              <span>{emoji}</span>{label}
+              {iconKey === 'chat' ? <Bot className="w-4 h-4" /> : iconKey === 'youtube' ? <Youtube className="w-4 h-4" /> : <Search className="w-4 h-4" />}{label}
             </button>
           ))}
         </div>
@@ -243,7 +247,7 @@ export default function AIAssistantPage() {
             {(['chat', 'youtube', 'google'] as Tab[]).map(t => (
               <button key={t} onClick={() => setActiveTab(t)}
                 className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${activeTab === t ? 'bg-primary text-white' : 'bg-muted text-muted-foreground'}`}>
-                {t === 'chat' ? 'ðŸ’¬' : t === 'youtube' ? 'â–¶ï¸' : 'ðŸ”'}
+                {t === 'chat' ? <Bot className="w-4 h-4" /> : t === 'youtube' ? <Youtube className="w-4 h-4" /> : <Search className="w-4 h-4" />}
               </button>
             ))}
           </div>
